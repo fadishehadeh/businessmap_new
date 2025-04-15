@@ -72,26 +72,40 @@ const PopularServices = () => {
           </Button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => (
             <Link 
               key={service.id} 
               to={service.link}
-              className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col h-full shadow-sm transition-all duration-300 hover:shadow-lg hover:border-qatari/50 hover:-translate-y-1 group"
-              onMouseEnter={() => setActiveService(service.id)}
-              onMouseLeave={() => setActiveService(null)}
+              className="group relative h-[280px] overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2"
             >
-              <div className="rounded-full w-12 h-12 flex items-center justify-center bg-qatari/10 mb-4 group-hover:bg-qatari/20 transition-colors">
-                <service.icon className={`h-6 w-6 text-qatari ${activeService === service.id ? 'scale-110 transition-transform' : ''}`} />
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 opacity-90" />
+              
+              <div className="relative h-full p-8 flex flex-col">
+                <div className="mb-6">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-qatari to-qatari-light flex items-center justify-center transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
+                    <service.icon className="h-8 w-8 text-white" />
+                  </div>
+                </div>
+                
+                <div className="flex-grow">
+                  <h3 className="text-xl font-semibold text-white mb-3 transition-transform duration-500 group-hover:translate-x-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm transition-transform duration-500 group-hover:translate-x-2">
+                    {service.description}
+                  </p>
+                </div>
+                
+                <div className="mt-6">
+                  <span className="inline-flex items-center text-qatari font-medium text-sm group-hover:translate-x-2 transition-all duration-500">
+                    Get Started
+                    <ChevronRight className="ml-1 h-4 w-4 transform transition-transform duration-500 group-hover:translate-x-1" />
+                  </span>
+                </div>
               </div>
               
-              <h3 className="text-lg font-semibold mb-2 group-hover:text-qatari transition-colors">{service.title}</h3>
-              <p className="text-gray-600 text-sm mb-4">{service.description}</p>
-              
-              <div className="mt-auto flex items-center text-qatari font-medium text-sm group-hover:translate-x-1 transition-transform">
-                Get Started
-                <ChevronRight className="ml-1 h-4 w-4 group-hover:ml-2 transition-all" />
-              </div>
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-qatari to-qatari-light transform origin-left transition-transform duration-500 scale-x-0 group-hover:scale-x-100" />
             </Link>
           ))}
         </div>

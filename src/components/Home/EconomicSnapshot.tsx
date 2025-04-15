@@ -61,17 +61,26 @@ const EconomicSnapshot = () => {
             return (
               <div 
                 key={stat.title}
-                className={`bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200 p-6 shadow-sm transition-all duration-300 ${isHovered ? 'shadow-lg transform -translate-y-1' : ''}`}
+                className={`relative group overflow-hidden rounded-2xl bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-sm shadow-lg transition-all duration-500 ${isHovered ? 'transform -translate-y-2' : ''}`}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="rounded-full w-12 h-12 flex items-center justify-center bg-qatari/10 mb-4">
-                  <IconComponent className={`h-6 w-6 text-qatari ${isHovered ? 'animate-pulse' : ''}`} />
+                <div className="absolute inset-0 bg-gradient-to-br from-qatari/5 to-qatari/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="p-8 relative z-10">
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-qatari to-qatari-light transform transition-transform duration-500 ${isHovered ? 'scale-110' : ''}`}>
+                    <IconComponent className="h-8 w-8 text-white" />
+                  </div>
+                  
+                  <div className="mt-6">
+                    <div className={`text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-qatari to-qatari-light transition-all duration-500 ${isHovered ? 'skew-x-6' : ''}`}>
+                      {stat.value}
+                    </div>
+                    <h3 className="text-xl font-semibold mt-2 text-gray-900">{stat.title}</h3>
+                    <p className="text-gray-600 mt-2">{stat.description}</p>
+                  </div>
                 </div>
                 
-                <h3 className="text-lg font-semibold mb-2">{stat.title}</h3>
-                <div className="text-3xl font-bold text-qatari mb-3">{stat.value}</div>
-                <p className="text-gray-600 text-sm">{stat.description}</p>
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-qatari to-qatari-light transform origin-left transition-transform duration-500 scale-x-0 group-hover:scale-x-100" />
               </div>
             );
           })}
