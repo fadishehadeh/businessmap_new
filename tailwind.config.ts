@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,16 +53,20 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+				qatari: {
+					DEFAULT: '#8b0d32', // Maroon - Qatar's national color
+					light: '#a82645',
+					dark: '#6a0926',
+					foreground: '#ffffff',
+				},
+				info: '#0066cc',
+				success: '#28a745',
+				warning: '#ffc107',
+				danger: '#dc3545',
+			},
+			fontFamily: {
+				sans: ['Inter var', 'Inter', 'sans-serif'],
+				display: ['Inter var', 'Inter', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -70,26 +75,38 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' },
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
-				}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' },
+				},
+				'fade-in': {
+					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' },
+				},
+				'fade-out': {
+					'0%': { opacity: '1', transform: 'translateY(0)' },
+					'100%': { opacity: '0', transform: 'translateY(10px)' },
+				},
+				'slide-in-right': {
+					'0%': { transform: 'translateX(100%)' },
+					'100%': { transform: 'translateX(0)' },
+				},
+				'slide-out-right': {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(100%)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'fade-out': 'fade-out 0.3s ease-out',
+				'slide-in-right': 'slide-in-right 0.3s ease-out',
+				'slide-out-right': 'slide-out-right 0.3s ease-out',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
