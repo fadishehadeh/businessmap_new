@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   Search, 
@@ -43,8 +42,14 @@ const services = [
 
 const PopularServices = () => {
   return (
-    <section className="py-20">
-      <div className="container-wide">
+    <section className="py-20 relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-fixed opacity-5"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070')"
+        }}
+      />
+      <div className="container-wide relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
           <div>
             <h2 className="text-3xl font-bold mb-2">Popular Services</h2>
@@ -67,7 +72,7 @@ const PopularServices = () => {
             <Link 
               key={service.id} 
               to={service.link}
-              className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col h-full shadow-sm transition-all duration-300 hover:shadow-md hover:border-qatari/20 hover:-translate-y-1"
+              className="bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200 p-6 flex flex-col h-full shadow-sm transition-all duration-300 hover:shadow-md hover:border-qatari/20 hover:-translate-y-1"
             >
               <div className="rounded-full w-12 h-12 flex items-center justify-center bg-qatari/10 mb-4">
                 <service.icon className="h-6 w-6 text-qatari" />

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { TrendingUp, BarChart, FileCheck, Globe } from 'lucide-react';
 
@@ -31,8 +30,14 @@ const stats = [
 
 const EconomicSnapshot = () => {
   return (
-    <section className="py-20">
-      <div className="container-wide">
+    <section className="py-20 relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-fixed opacity-5"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1460574283810-2aab119d8511?q=80&w=2070')"
+        }}
+      />
+      <div className="container-wide relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Qatar Economic Snapshot</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -48,7 +53,7 @@ const EconomicSnapshot = () => {
             return (
               <div 
                 key={stat.title}
-                className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:border-qatari/20"
+                className="bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200 p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:border-qatari/20"
               >
                 <div className="rounded-full w-12 h-12 flex items-center justify-center bg-qatari/10 mb-4">
                   <IconComponent className="h-6 w-6 text-qatari" />
