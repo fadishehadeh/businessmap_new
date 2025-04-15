@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ChevronRight, ArrowRight } from 'lucide-react';
+import { ChevronRight, ArrowRight, Building2, Briefcase, Globe2, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { 
   Carousel,
@@ -68,24 +68,46 @@ const RegionalSection = () => {
   const isMobile = useIsMobile();
   const { countryCode, countryName, isLoading } = useUserLocation();
   
-  // Find the user's country in our list, or default to showing all countries
   const userCountry = countries.find(country => country.code === countryCode);
   
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container-wide">
         <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-4">International Investor Resources</h2>
+          <div className="flex items-center gap-3 text-qatari mb-4">
+            <Globe2 className="h-6 w-6" />
+            <h2 className="text-3xl font-bold">International Investor Resources</h2>
+          </div>
           <p className="text-lg text-gray-600 max-w-3xl">
             Access tailored information and resources specific to your region. Our international 
             investment guides provide localized insights for investors from around the world.
           </p>
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="glass-card p-6">
+            <Building2 className="h-8 w-8 text-qatari mb-4" />
+            <h3 className="text-xl font-semibold mb-2">100% Foreign Ownership</h3>
+            <p className="text-gray-600">Full ownership rights across most sectors, with streamlined company registration process.</p>
+          </div>
+          
+          <div className="glass-card p-6">
+            <Briefcase className="h-8 w-8 text-qatari mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Investment Incentives</h3>
+            <p className="text-gray-600">Tax benefits, custom duty exemptions, and property ownership rights for foreign investors.</p>
+          </div>
+          
+          <div className="glass-card p-6">
+            <Target className="h-8 w-8 text-qatari mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Strategic Location</h3>
+            <p className="text-gray-600">Gateway to MENA markets with world-class infrastructure and logistics capabilities.</p>
+          </div>
+        </div>
         
         {userCountry && !isLoading && (
-          <div className="mb-12 bg-white rounded-xl border border-gray-200 p-6 md:p-8 shadow-sm">
+          <div className="mb-12 glass-card p-8 border-2 border-qatari/10">
             <div className="flex flex-col md:flex-row gap-6 items-start">
-              <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 bg-gray-100 rounded-lg flex items-center justify-center text-4xl md:text-5xl">
+              <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-qatari to-qatari-light rounded-lg flex items-center justify-center text-4xl md:text-5xl shadow-lg">
                 {userCountry.flag}
               </div>
               <div className="flex-grow">
@@ -124,10 +146,10 @@ const RegionalSection = () => {
                 <CarouselItem key={country.code} className="md:basis-1/3 lg:basis-1/4">
                   <Link 
                     to={`/investors/regions/${country.code.toLowerCase()}`}
-                    className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col h-full shadow-sm transition-all duration-300 hover:shadow-md hover:border-qatari/20 hover:-translate-y-1"
+                    className="glass-card p-5 flex flex-col h-full shadow-sm card-hover"
                   >
                     <div className="flex mb-4 items-center">
-                      <div className="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-2xl mr-3">
+                      <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-qatari to-qatari-light rounded-lg flex items-center justify-center text-2xl mr-3 shadow-md">
                         {country.flag}
                       </div>
                       <h4 className="font-semibold">{country.name}</h4>
