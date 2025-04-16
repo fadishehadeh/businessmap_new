@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  ChevronRight,
   Facebook,
   Twitter,
   Instagram,
@@ -18,6 +17,7 @@ import {
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { AuthButtons } from '../Auth/AuthButtons';
 
 const Footer = () => {
   const isMobile = useIsMobile();
@@ -172,6 +172,10 @@ const Footer = () => {
             </div>
           </div>
           
+          <div className="flex items-center gap-4">
+            <AuthButtons variant="footer" />
+          </div>
+          
           {/* Social Media Icons */}
           <div className="flex space-x-4">
             <a 
@@ -222,4 +226,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

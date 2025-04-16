@@ -16,6 +16,7 @@ import {
 import NavigationMenuDemo from './NavigationMenu';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { AuthButtons } from '../Auth/AuthButtons';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,6 +52,8 @@ const Header = () => {
           <Button variant="ghost" size="icon" aria-label="Search">
             <Search className="h-5 w-5" />
           </Button>
+
+          <AuthButtons />
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -111,10 +114,8 @@ const Header = () => {
               <Link to="/resources" className="py-2 text-lg border-b border-gray-100">
                 Resources
               </Link>
-              <div className="pt-4">
-                <Button className="w-full bg-qatari hover:bg-qatari-light">
-                  Start a Business
-                </Button>
+              <div className="pt-4 flex flex-col gap-2">
+                <AuthButtons />
               </div>
             </nav>
           </div>
