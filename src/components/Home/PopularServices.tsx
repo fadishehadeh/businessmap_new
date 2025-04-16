@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Search,
@@ -18,6 +17,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import ServiceTile from './ServiceExplorer/ServiceTile';
 import ServiceDrawer from './ServiceExplorer/ServiceDrawer';
 import { ServiceItem } from './ServiceExplorer/types';
+import { cn } from '@/lib/utils';
 
 const services: ServiceItem[] = [
   {
@@ -117,7 +117,6 @@ const PopularServices = () => {
     setActiveService(null);
   };
 
-  // Support keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowRight') {
       document.querySelector('.carousel-next')?.dispatchEvent(
@@ -136,7 +135,6 @@ const PopularServices = () => {
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      {/* Background with blur and Qatar skyline */}
       <div 
         className="absolute inset-0 bg-[url('/images/hero.jpg')] bg-cover bg-center bg-fixed opacity-5"
         aria-hidden="true"
@@ -182,7 +180,6 @@ const PopularServices = () => {
             <CarouselNext className="hidden md:flex -right-4 lg:-right-12 carousel-next" />
           </Carousel>
 
-          {/* Progress Indicators */}
           <div className="flex justify-center space-x-2 mt-8">
             {services.map((service, index) => (
               <div 
