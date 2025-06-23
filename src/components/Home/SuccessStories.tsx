@@ -98,28 +98,24 @@ const SuccessStories = () => {
     <section className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white"></div>
       <div className="container-wide relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
+        <div className="mb-10">
           <div>
             <h2 className="text-3xl font-bold mb-2">Success Stories & Updates</h2>
             <p className="text-gray-600">Latest news, events, and investor success stories</p>
           </div>
-          <Button
-            asChild
-            variant="outline"
-            className="mt-4 md:mt-0"
-          >
-            <Link to="/media-centre">
-              View All News
-              <ChevronRight className="ml-1 h-4 w-4" />
-            </Link>
-          </Button>
         </div>
 
         <Tabs defaultValue="success" className="w-full">
-          <TabsList className="mb-8 border border-gray-400">
-            <TabsTrigger value="success" className="text-xl">Success Stories</TabsTrigger>
-            <TabsTrigger value="press" className="text-black data-[state=active]:text-black text-xl">Press Releases</TabsTrigger>
-            <TabsTrigger value="events" className="text-black data-[state=active]:text-black text-xl">Upcoming Events</TabsTrigger>
+          <TabsList className="mb-8 border border-gray-400 p-1 bg-transparent">
+            <TabsTrigger value="success" className="text-xl px-4 py-2 text-black data-[state=active]:bg-transparent data-[state=active]:text-qatari">Success Stories</TabsTrigger>
+            <TabsTrigger value="press" className="text-black data-[state=active]:bg-transparent data-[state=active]:text-qatari text-xl px-4 py-2">Press Releases</TabsTrigger>
+            <TabsTrigger value="events" className="text-black data-[state=active]:bg-transparent data-[state=active]:text-qatari text-xl px-4 py-2">Upcoming Events</TabsTrigger>
+            <TabsTrigger value="all-news" asChild className="text-black data-[state=active]:bg-transparent data-[state=active]:text-qatari text-xl px-4 py-2">
+              <Link to="/media-centre" className="flex items-center">
+                View All News
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </Link>
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="success">
