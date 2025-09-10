@@ -22,50 +22,96 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const successStories = [
+// Import news data from the News page
+const newsArticles = [
   {
-    id: 1,
-    title: 'Tech Innovator Opens Regional Headquarters in Doha',
-    excerpt: "A leading global technology company establishes its MENA headquarters in Qatar's Digital District, creating 200 new jobs.",
-    image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2070',
-    date: 'March 15, 2025',
+    id: 295,
+    title: "Ministry of Commerce and Industry Launches New Digital Platform for Business Registration",
+    excerpt: "The Ministry announces the launch of a comprehensive digital platform aimed at streamlining business registration processes and enhancing investor experience in Qatar.",
+    date: "January 15, 2024",
+    category: "Business",
+    readTime: "3 min read",
+    image: "/images/image1.jpg",
+    featured: true
   },
   {
-    id: 2,
-    title: 'Foreign Investment Drives Manufacturing Expansion',
-    excerpt: "Major European manufacturing firm invests $50 million in new production facility in Qatar's Industrial Area.",
-    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070',
-    date: 'February 28, 2025',
+    id: 294,
+    title: "Qatar's Economic Growth Reaches New Heights in Q4 2023",
+    excerpt: "Latest economic indicators show robust growth across multiple sectors, reinforcing Qatar's position as a leading business destination in the region.",
+    date: "January 12, 2024",
+    category: "Economy",
+    readTime: "5 min read",
+    image: "/images/image2.jpg",
+    featured: false
   },
   {
-    id: 3,
-    title: 'Agricultural Technology Partnership Flourishes',
-    excerpt: 'Joint venture between Qatari and Asian investors creates innovative hydroponic farming solution.',
-    image: 'https://images.unsplash.com/photo-1496307653780-42ee777d4833?q=80&w=2070',
-    date: 'January 20, 2025',
-  },
+    id: 293,
+    title: "New Trade Agreements Signed to Boost International Commerce",
+    excerpt: "The Ministry signs strategic trade agreements with multiple countries to enhance bilateral trade relationships and expand market opportunities.",
+    date: "January 10, 2024",
+    category: "Trade",
+    readTime: "4 min read",
+    image: "/images/image3.jpg",
+    featured: false
+  }
 ];
 
-const pressReleases = [
+const successStories = newsArticles.slice(0, 3).map(article => ({
+  id: article.id,
+  title: article.title,
+  excerpt: article.excerpt,
+  image: article.image,
+  date: new Date(article.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
+}));
+
+// Additional news articles for press releases
+const additionalNews = [
   {
-    id: 1,
-    title: 'MOCI Announces New Digital Business Registry Platform',
-    excerpt: 'The Ministry launches an enhanced digital business registry to streamline company formation and compliance.',
-    date: 'April 10, 2025',
+    id: 292,
+    title: "Consumer Protection Initiatives Strengthen Market Confidence",
+    excerpt: "Enhanced consumer protection measures implemented to ensure fair trading practices and maintain high standards in the marketplace.",
+    date: "January 8, 2024",
+    category: "Consumer",
+    readTime: "3 min read",
+    image: "/images/image4.jpg",
+    featured: false
   },
   {
-    id: 2,
-    title: 'Qatar Investment Forum Scheduled for September 2025',
-    excerpt: 'Annual investment forum to showcase opportunities across energy, technology, tourism and finance sectors.',
-    date: 'March 30, 2025',
+    id: 291,
+    title: "Innovation Hub Launched to Support Startups and SMEs",
+    excerpt: "New innovation hub provides comprehensive support services for startups and small-to-medium enterprises looking to establish operations in Qatar.",
+    date: "January 5, 2024",
+    category: "Innovation",
+    readTime: "4 min read",
+    image: "/images/image5.jpg",
+    featured: false
   },
   {
-    id: 3,
-    title: 'New Regulations Expand Foreign Investment Incentives',
-    excerpt: 'Updated regulations offer enhanced tax incentives and operational benefits for international investors.',
-    date: 'March 5, 2025',
-  },
+    id: 290,
+    title: "Sustainability Initiatives Drive Green Business Practices",
+    excerpt: "The Ministry introduces new sustainability guidelines and incentives to promote environmentally responsible business practices across all sectors.",
+    date: "January 3, 2024",
+    category: "Sustainability",
+    readTime: "5 min read",
+    image: "/images/image6.png",
+    featured: false
+  }
 ];
+
+const pressReleases = additionalNews.map(article => ({
+  id: article.id,
+  title: article.title,
+  excerpt: article.excerpt,
+  date: new Date(article.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
+}));
 
 const events = [
   {
@@ -137,7 +183,7 @@ const SuccessStories = () => {
                     <p className="text-gray-600 line-clamp-3 text-xl">{story.excerpt}</p>
                   </CardContent>
                   <CardFooter>
-                    <Link to={`/media-centre/stories/${story.id}`} className="text-qatari font-medium text-xl flex items-center">
+                    <Link to={`/media-centre/news/${story.id}`} className="text-qatari font-medium text-xl flex items-center">
                       Read Full Story
                       <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
@@ -167,7 +213,7 @@ const SuccessStories = () => {
                       <p className="text-gray-600 line-clamp-3 text-xl">{press.excerpt}</p>
                     </CardContent>
                     <CardFooter>
-                      <Link to={`/media-centre/press/${press.id}`} className="text-qatari font-medium text-xl flex items-center">
+                      <Link to={`/media-centre/news/${press.id}`} className="text-qatari font-medium text-xl flex items-center">
                         Read Press Release
                         <ArrowRight className="ml-1 h-4 w-4" />
                       </Link>

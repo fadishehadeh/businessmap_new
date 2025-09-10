@@ -22,14 +22,14 @@ const segments = [
     title: 'Local Businesses',
     description: 'Access resources for Qatari businesses, licensing, trade registrations, and local regulations.',
     icon: Building2,
-    link: '/consumers',
+    link: '/services/business',
     color: 'bg-white shadow-sm',
   },
   {
     title: 'Consumers',
     description: 'Learn about consumer protection, prices, and file complaints about commercial establishments.',
     icon: Users,
-    link: '/consumers',
+    link: '/services/consumer',
     color: 'bg-white shadow-sm',
   },
   {

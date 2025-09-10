@@ -9,7 +9,7 @@ const InternationalHero = () => {
     <section className="relative h-screen bg-gray-100 text-white opacity-100" aria-labelledby="hero-heading">
       {/* Background Image with Overlay */}
       <div
-        className="absolute inset-0 bg-cover bg-center z-0 opacity-100"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-100"
         style={{
           backgroundImage: "url('/images/hero.jpg')",
           backgroundPosition: "center 30%"

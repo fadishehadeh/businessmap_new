@@ -26,7 +26,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </a>
 
       <Header />
-      <main id="main-content" className="flex-grow pt-[115px]" role="main">
+      <main id="main-content" className="flex-grow pt-[220px]" role="main">
         {children}
       </main>
       <ChatSupport />

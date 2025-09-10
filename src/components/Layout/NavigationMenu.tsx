@@ -10,105 +10,103 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import { scrollToTop } from '@/hooks/use-scroll-to-top';
 
 const menuItems = [
   {
     title: "About the Ministry",
     href: "/about",
     submenu: [
-      { title: "Vision, Mission & Values", href: "/about/vision" },
       { title: "The Minister", href: "/about/minister" },
+      { title: "The Strategy of the Ministry", href: "/about/strategy" },
+      { title: "Vision, Mission & Values", href: "/about/vision" },
       { title: "National Committees", href: "/about/committees" },
-      { title: "Departments", href: "/about/departments" },
-      { title: "Branches", href: "/about/branches" },
-      { title: "Anti-money Laundering & Terrorism Financing", href: "/about/aml" },
     ]
   },
   {
-    title: "Consumers",
-    href: "/consumers",
+    title: "Services Hub",
+    href: "/services",
     submenu: [
-      { title: "E-Services", href: "/consumers/e-services" },
-      { title: "Services & Transaction Forms", href: "/consumers/services" },
-      { title: "Awareness", href: "/consumers/awareness" },
+      { title: "Business", href: "/services/business" },
+      { title: "Consumer", href: "/services/consumer" },
     ]
   },
   {
-    title: "Investors",
-    href: "/investors",
-    submenu: [
-      { title: "E-Services", href: "/investors/e-services" },
-      { title: "Services & Transaction Forms", href: "/investors/services" },
-      { title: "Qatar Investment Portal", href: "/investors/portal" },
-      { title: "Awareness", href: "/investors/awareness" },
-    ]
-  },
-  {
-    title: "Organisations",
-    href: "/organisations",
-    submenu: [
-      { title: "E-Services", href: "/organisations/e-services" },
-      { title: "Services & Transaction Forms", href: "/organisations/services" },
-      { title: "Qatar Industry Portal", href: "/organisations/industry-portal" },
-      { title: "Qatar Business Map", href: "/organisations/business-map" },
-      { title: "Awareness", href: "/organisations/awareness" },
-    ]
-  },
-  {
-    title: "Industry",
-    href: "/industry",
-    submenu: [
-      { title: "E-Services", href: "/industry/e-services" },
-      { title: "Services & Transaction Forms", href: "/industry/services" },
-    ]
+    title: "E-Services",
+    href: "/e-services"
   },
   {
     title: "Media Centre",
-    href: "/media-centre",
+    href: "/media-centre/news",
     submenu: [
       { title: "News", href: "/media-centre/news" },
+      { title: "Reports", href: "/media-centre/reports" },
+      { title: "Gallery", href: "/media-centre/gallery" },
     ]
   },
   {
     title: "Resources",
-    href: "/resources",
-    submenu: [
-      { title: "Statistics & Reports", href: "/resources/statistics" },
-      { title: "Initiatives", href: "/resources/initiatives" },
-      { title: "Useful websites", href: "/resources/websites" },
-    ]
+    href: "/resources"
+  },
+  {
+    title: "Contact Us",
+    href: "/contact-us"
   },
 ];
 
 const NavigationMenuDemo = () => {
+  const handleMainNavClick = () => {
+    // Add a small delay to ensure navigation starts before scrolling
+    setTimeout(() => {
+      scrollToTop();
+    }, 100);
+  };
+
   return (
     <NavigationMenu>
       <NavigationMenuList className="gap-1">
         {menuItems.map((item) => (
           <NavigationMenuItem key={item.title}>
-            <NavigationMenuTrigger className="text-xl font-medium bg-transparent hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent text-white hover:text-white focus:text-white">
-              {item.title}
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-2 p-4">
-                {item.submenu.map((subItem) => (
-                  <li key={subItem.title}>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        to={subItem.href}
-                        className={cn(
-                          "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        )}
-                      >
-                        <div className="text-sm font-medium leading-none">
-                          {subItem.title}
-                        </div>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                ))}
-              </ul>
-            </NavigationMenuContent>
+            {item.submenu ? (
+              <>
+                <NavigationMenuTrigger className="text-xl font-medium bg-transparent hover:bg-white/10 focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-white/10 text-white hover:text-white focus:text-white transition-colors duration-200 px-4 py-2 rounded-md">
+                  <Link to={item.href} className="flex items-center" onClick={handleMainNavClick}>
+                    {item.title}
+                  </Link>
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="mt-1">
+                  <ul className="grid w-[350px] gap-1 p-2">
+                    {item.submenu.map((subItem) => (
+                      <li key={subItem.title}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to={subItem.href}
+                            onClick={handleMainNavClick}
+                            className={cn(
+                              "block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-qatari/10 hover:text-qatari focus:bg-qatari/10 focus:text-qatari text-gray-700 border-l-4 border-transparent hover:border-qatari"
+                            )}
+                          >
+                            <div className="text-base font-medium leading-tight">
+                              {subItem.title}
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </>
+            ) : (
+              <NavigationMenuLink asChild>
+                <Link
+                  to={item.href}
+                  onClick={handleMainNavClick}
+                  className="text-xl font-medium bg-transparent hover:bg-transparent focus:bg-transparent text-white hover:text-white focus:text-white px-4 py-2 rounded-md transition-colors"
+                >
+                  {item.title}
+                </Link>
+              </NavigationMenuLink>
+            )}
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>

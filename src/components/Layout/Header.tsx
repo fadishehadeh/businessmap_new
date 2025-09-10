@@ -18,13 +18,28 @@ import NavigationMenuDemo from './NavigationMenu';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AuthButtons } from '../Auth/AuthButtons';
+import { scrollToTop } from '@/hooks/use-scroll-to-top';
+import SearchModal from '../Search/SearchModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const isMobile = useIsMobile();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+
+  const handleMobileNavClick = () => {
+    setIsMenuOpen(false);
+    // Add a small delay to ensure navigation starts before scrolling
+    setTimeout(() => {
+      scrollToTop();
+    }, 100);
   };
 
   return (
@@ -47,7 +62,13 @@ const Header = () => {
             {/* Right Side - Existing Items */}
             <div className="flex items-center gap-4">
               {/* Search Button */}
-              <Button variant="ghost" size="icon" aria-label="Search the website" className="text-gray-600 hover:text-qatari">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleSearch}
+                aria-label="Search the website"
+                className="text-gray-600 hover:text-qatari"
+              >
                 <Search className="h-4 w-4" aria-hidden="true" />
               </Button>
 
@@ -73,8 +94,6 @@ const Header = () => {
                 <DropdownMenuContent align="end" role="menu" aria-label="Language options">
                   <DropdownMenuItem role="menuitem">English</DropdownMenuItem>
                   <DropdownMenuItem role="menuitem" lang="ar">العربية</DropdownMenuItem>
-                  <DropdownMenuItem role="menuitem" lang="zh">中文</DropdownMenuItem>
-                  <DropdownMenuItem role="menuitem" lang="ru">Русский</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -126,26 +145,48 @@ const Header = () => {
               role="navigation"
               aria-label="Mobile navigation"
             >
-              <Link to="/about" className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded">
+              <Link
+                to="/about"
+                onClick={handleMobileNavClick}
+                className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded"
+              >
                 About the Ministry
               </Link>
-              <Link to="/consumers" className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded">
-                Consumers
+              <Link
+                to="/services"
+                onClick={handleMobileNavClick}
+                className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded"
+              >
+                Services Hub
               </Link>
-              <Link to="/investors" className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded">
-                Investors
+              <Link
+                to="/e-services"
+                onClick={handleMobileNavClick}
+                className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded"
+              >
+                E-Services
               </Link>
-              <Link to="/organizations" className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded">
-                Organizations
-              </Link>
-              <Link to="/industry" className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded">
-                Industry
-              </Link>
-              <Link to="/media-center" className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded">
+
+              <Link
+                to="/media-centre/news"
+                onClick={handleMobileNavClick}
+                className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded"
+              >
                 Media Centre
               </Link>
-              <Link to="/resources" className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded">
+              <Link
+                to="/resources"
+                onClick={handleMobileNavClick}
+                className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded"
+              >
                 Resources
+              </Link>
+              <Link
+                to="/contact-us"
+                onClick={handleMobileNavClick}
+                className="py-2 text-lg border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded"
+              >
+                Contact Us
               </Link>
               {/* Place AuthButtons at the end of mobile menu */}
               <div className="pt-4">
@@ -155,6 +196,9 @@ const Header = () => {
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 };
