@@ -24,6 +24,9 @@ import Gallery from "./pages/MediaCenter/Gallery";
 import Resources from "./pages/Resources/Resources";
 import ContactUs from "./pages/ContactUs";
 import ContactPageForFigma from "./components/ContactPageForFigma";
+import Password from "./pages/Password";
+import { AuthProvider } from "./context/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -32,31 +35,167 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/international" element={<International />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/about/minister" element={<Minister />} />
-          <Route path="/about/strategy" element={<Strategy />} />
-          <Route path="/about/vision" element={<VisionMissionValues />} />
-          <Route path="/about/committees" element={<NationalCommittees />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/business" element={<Business />} />
-          <Route path="/services/consumer" element={<Consumer />} />
-          <Route path="/e-services" element={<EServices />} />
-          <Route path="/media-centre" element={<MediaCenter />} />
-          <Route path="/media-centre/news" element={<News />} />
-          <Route path="/media-centre/news/:id" element={<NewsArticle />} />
-          <Route path="/media-centre/reports" element={<Reports />} />
-          <Route path="/media-centre/gallery" element={<Gallery />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/contact-figma" element={<ContactPageForFigma />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/password" element={<Password />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Index />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/international"
+              element={
+                <ProtectedRoute>
+                  <International />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <ProtectedRoute>
+                  <About />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/about/minister"
+              element={
+                <ProtectedRoute>
+                  <Minister />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/about/strategy"
+              element={
+                <ProtectedRoute>
+                  <Strategy />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/about/vision"
+              element={
+                <ProtectedRoute>
+                  <VisionMissionValues />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/about/committees"
+              element={
+                <ProtectedRoute>
+                  <NationalCommittees />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/services"
+              element={
+                <ProtectedRoute>
+                  <Services />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/services/business"
+              element={
+                <ProtectedRoute>
+                  <Business />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/services/consumer"
+              element={
+                <ProtectedRoute>
+                  <Consumer />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/e-services"
+              element={
+                <ProtectedRoute>
+                  <EServices />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/media-centre"
+              element={
+                <ProtectedRoute>
+                  <MediaCenter />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/media-centre/news"
+              element={
+                <ProtectedRoute>
+                  <News />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/media-centre/news/:id"
+              element={
+                <ProtectedRoute>
+                  <NewsArticle />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/media-centre/reports"
+              element={
+                <ProtectedRoute>
+                  <Reports />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/media-centre/gallery"
+              element={
+                <ProtectedRoute>
+                  <Gallery />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/resources"
+              element={
+                <ProtectedRoute>
+                  <Resources />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/contact-us"
+              element={
+                <ProtectedRoute>
+                  <ContactUs />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/contact-figma"
+              element={
+                <ProtectedRoute>
+                  <ContactPageForFigma />
+                </ProtectedRoute>
+              }
+            />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
