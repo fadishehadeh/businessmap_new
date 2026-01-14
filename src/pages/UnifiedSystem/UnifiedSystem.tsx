@@ -67,13 +67,15 @@ const UnifiedSystem: React.FC = () => {
       <header className="p-6 flex justify-between items-center animate-fade-in">
         {/* Right side - Logos */}
         <div className="flex items-center gap-6">
-          {/* Unified Logo - Increased size */}
+          {/* Unified Logo on the right */}
           <img
             src="/images/unifiedlogo.png"
             alt="Unified Logo"
             className="h-20 object-contain hover:scale-105 transition-transform"
           />
-          {/* MOCI Logo */}
+          {/* Vertical divider */}
+          <div className="h-16 w-px bg-white/40"></div>
+          {/* MOCI Logo on the left */}
           <img
             src="/images/logo-main-white.svg"
             alt="MOCI Logo"
@@ -229,7 +231,7 @@ const UnifiedSystem: React.FC = () => {
                     onMouseEnter={() => setHoveredCard(index)}
                     onMouseLeave={() => setHoveredCard(null)}
                   >
-                    <CardContent className="p-6 flex flex-col items-center gap-4 relative z-10">
+                    <CardContent className="p-6 flex flex-col items-center gap-4 relative z-10" style={{ fontFamily: 'Lusail, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
                       <div className="bg-[#345D9B]/10 p-3 rounded-lg group-hover:bg-[#345D9B] transition-colors duration-300">
                         <service.icon className="h-6 w-6 text-[#345D9B] group-hover:text-white transition-colors duration-300" />
                       </div>
