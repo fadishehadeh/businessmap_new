@@ -62,7 +62,7 @@ const UnifiedSystem: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-l from-[#1D4381] to-[#1B458A]" dir="rtl" style={{ fontFamily: 'Lusail, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
+    <div className="min-h-screen bg-gradient-to-l from-[#1D4381] to-[#1B458A]" style={{ fontFamily: 'Lusail, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
       {/* Header */}
       <header className="p-6 flex justify-between items-center animate-fade-in">
         {/* Left side - Language and accessibility */}
