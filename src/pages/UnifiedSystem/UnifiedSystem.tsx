@@ -65,34 +65,34 @@ const UnifiedSystem: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-l from-[#1D4381] to-[#1B458A]" dir="rtl" style={{ fontFamily: 'Lusail, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
       {/* Header */}
       <header className="p-6 flex justify-between items-center animate-fade-in">
+        {/* Left side - Language and accessibility */}
+        <div className="flex items-center gap-4 text-white">
+          <button className="text-sm hover:underline transition-all hover:scale-105">English</button>
+          <button className="text-xl hover:scale-110 transition-transform">🔊</button>
+          <button className="text-xl hover:scale-110 transition-transform">A+</button>
+          <button className="text-xl hover:scale-110 transition-transform">A</button>
+          <button className="text-xl hover:scale-110 transition-transform">A-</button>
+          <button className="px-6 py-2 bg-white text-[#1D4381] rounded-full text-sm font-medium hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
+            تسجيل الدخول
+          </button>
+        </div>
+
         {/* Right side - Logos */}
         <div className="flex items-center gap-6">
+          {/* MOCI Logo on the left of divider */}
+          <img
+            src="/images/logo-main-white.svg"
+            alt="MOCI Logo"
+            className="h-20 object-contain hover:scale-105 transition-transform"
+          />
+          {/* Vertical divider */}
+          <div className="h-16 w-px bg-white/40"></div>
           {/* Unified Logo on the right */}
           <img
             src="/images/unifiedlogo.png"
             alt="Unified Logo"
             className="h-20 object-contain hover:scale-105 transition-transform"
           />
-          {/* Vertical divider */}
-          <div className="h-16 w-px bg-white/40"></div>
-          {/* MOCI Logo on the left */}
-          <img
-            src="/images/logo-main-white.svg"
-            alt="MOCI Logo"
-            className="h-20 object-contain hover:scale-105 transition-transform"
-          />
-        </div>
-
-        {/* Left side - Language and accessibility */}
-        <div className="flex items-center gap-4 text-white">
-          <button className="px-6 py-2 bg-white text-[#1D4381] rounded-full text-sm font-medium hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
-            تسجيل الدخول
-          </button>
-          <button className="text-xl hover:scale-110 transition-transform">A-</button>
-          <button className="text-xl hover:scale-110 transition-transform">A</button>
-          <button className="text-xl hover:scale-110 transition-transform">A+</button>
-          <button className="text-xl hover:scale-110 transition-transform">🔊</button>
-          <button className="text-sm hover:underline transition-all hover:scale-105">English</button>
         </div>
       </header>
 
@@ -179,40 +179,7 @@ const UnifiedSystem: React.FC = () => {
       {/* Services Section */}
       <div className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row-reverse gap-8">
-            {/* Side Menu - Moved to the right */}
-            <div className="lg:w-80">
-              <Card className="bg-white shadow-lg sticky top-4">
-                <CardContent className="p-6">
-                  {menuItems.map((item, index) => {
-                    const Icon = item.icon;
-                    const isFirst = index === 0 || menuItems[index - 1]?.section !== item.section;
-
-                    return (
-                      <div key={item.id}>
-                        {isFirst && (
-                          <div className="text-gray-400 text-sm mb-3 mt-4 first:mt-0 text-right">
-                            {item.section}
-                          </div>
-                        )}
-                        <button
-                          onClick={() => setSelectedMenu(item.id)}
-                          className={`w-full flex items-center gap-3 p-3 rounded-lg text-right transition-all duration-200 ${
-                            selectedMenu === item.id
-                              ? 'bg-[#345D9B]/10 text-[#345D9B] border-r-4 border-[#345D9B]'
-                              : 'hover:bg-gray-100 text-gray-700'
-                          }`}
-                        >
-                          <Icon className="h-5 w-5" />
-                          <span className="font-medium flex-1 text-right">{item.title}</span>
-                        </button>
-                      </div>
-                    );
-                  })}
-                </CardContent>
-              </Card>
-            </div>
-
+          <div className="flex flex-col lg:flex-row gap-8">
             {/* Services Grid */}
             <div className="flex-1">
               <div className="flex justify-between items-center mb-8">
@@ -266,6 +233,39 @@ const UnifiedSystem: React.FC = () => {
                 <p className="text-sm text-gray-600">عرض 1 إلى 12 من 36 نتيجة</p>
               </div>
             </div>
+
+            {/* Side Menu - On the right */}
+            <div className="lg:w-80">
+              <Card className="bg-white shadow-lg sticky top-4">
+                <CardContent className="p-6">
+                  {menuItems.map((item, index) => {
+                    const Icon = item.icon;
+                    const isFirst = index === 0 || menuItems[index - 1]?.section !== item.section;
+
+                    return (
+                      <div key={item.id}>
+                        {isFirst && (
+                          <div className="text-gray-400 text-sm mb-3 mt-4 first:mt-0 text-right">
+                            {item.section}
+                          </div>
+                        )}
+                        <button
+                          onClick={() => setSelectedMenu(item.id)}
+                          className={`w-full flex items-center gap-3 p-3 rounded-lg text-right transition-all duration-200 ${
+                            selectedMenu === item.id
+                              ? 'bg-[#345D9B]/10 text-[#345D9B] border-r-4 border-[#345D9B]'
+                              : 'hover:bg-gray-100 text-gray-700'
+                          }`}
+                        >
+                          <Icon className="h-5 w-5" />
+                          <span className="font-medium flex-1 text-right">{item.title}</span>
+                        </button>
+                      </div>
+                    );
+                  })}
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
@@ -274,17 +274,8 @@ const UnifiedSystem: React.FC = () => {
       <footer className="bg-[#345D9B] text-white py-8">
         <div className="container mx-auto px-4">
           {/* Top Section */}
-          <div className="flex flex-col md:flex-row-reverse justify-between items-center gap-6 mb-6">
-            {/* Logo - Moved to the right */}
-            <div className="flex items-center gap-4">
-              <img
-                src="/images/logo-main-white.svg"
-                alt="MOCI Logo"
-                className="h-16 object-contain"
-              />
-            </div>
-
-            {/* Contact Info - Moved to the left */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-6">
+            {/* Contact Info - On the left */}
             <div className="flex flex-wrap justify-center md:justify-start gap-8 text-white">
               {/* Contact Us */}
               <div className="text-center">
@@ -329,6 +320,15 @@ const UnifiedSystem: React.FC = () => {
                   <MessageSquare className="h-4 w-4" />
                 </a>
               </div>
+            </div>
+
+            {/* Logo - On the right */}
+            <div className="flex items-center gap-4">
+              <img
+                src="/images/logo-main-white.svg"
+                alt="MOCI Logo"
+                className="h-16 object-contain"
+              />
             </div>
           </div>
 
