@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Building2, MapPin, Play, Pause, RotateCcw, Navigation2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Building2, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface BuildingVisualizationProps {
   floor: number;
   zone: string;
   officeNumber: string;
   showAnimatedRoute?: boolean;
-  onRouteStart?: () => void;
+  currentPathStep?: number;
 }
 
 interface PathStep {
@@ -24,12 +23,9 @@ const BuildingVisualization: React.FC<BuildingVisualizationProps> = ({
   zone,
   officeNumber,
   showAnimatedRoute = false,
-  onRouteStart
+  currentPathStep = -1
 }) => {
   const [highlightedFloor, setHighlightedFloor] = useState<number | null>(null);
-  const [currentPathStep, setCurrentPathStep] = useState<number>(-1);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
   const [expandedFloors, setExpandedFloors] = useState<Set<number>>(new Set([floor]));
   const floors = [5, 4, 3, 2, 1]; // Top to bottom
   const zones = ['A', 'B', 'C'];
@@ -114,43 +110,6 @@ const BuildingVisualization: React.FC<BuildingVisualizationProps> = ({
     }, 300);
     return () => clearTimeout(timer);
   }, [floor]);
-
-  useEffect(() => {
-    if (isAnimating && !isPaused && currentPathStep < pathSteps.length - 1) {
-      const timer = setTimeout(() => {
-        setCurrentPathStep(prev => prev + 1);
-      }, 1500); // 1.5 seconds per step
-      return () => clearTimeout(timer);
-    } else if (currentPathStep >= pathSteps.length - 1) {
-      setIsAnimating(false);
-    }
-  }, [currentPathStep, isAnimating, isPaused, pathSteps.length]);
-
-  // Auto-start animation when showAnimatedRoute becomes true
-  useEffect(() => {
-    if (showAnimatedRoute && currentPathStep === -1) {
-      startAnimation();
-    }
-  }, [showAnimatedRoute]);
-
-  const startAnimation = () => {
-    setCurrentPathStep(0);
-    setIsAnimating(true);
-    setIsPaused(false);
-    if (onRouteStart) {
-      onRouteStart();
-    }
-  };
-
-  const pauseAnimation = () => {
-    setIsPaused(!isPaused);
-  };
-
-  const resetAnimation = () => {
-    setCurrentPathStep(-1);
-    setIsAnimating(false);
-    setIsPaused(false);
-  };
 
   const getCurrentStepInfo = () => {
     if (currentPathStep >= 0 && currentPathStep < pathSteps.length) {
@@ -385,103 +344,6 @@ const BuildingVisualization: React.FC<BuildingVisualizationProps> = ({
           </div>
         </CardContent>
       </Card>
-
-      {/* Animated Route Card - Separate */}
-      {showAnimatedRoute && (
-        <Card className="shadow-xl border-2 border-gray-200 dark:border-gray-700 mt-8">
-          <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
-            <CardTitle className="text-xl flex items-center gap-2">
-              <Navigation2 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              Animated Route
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-6">
-            {currentPathStep >= 0 && (
-              <div className="mb-4 p-4 bg-white dark:bg-gray-800 rounded-lg border-2 border-blue-300 dark:border-blue-700">
-                <p className="text-sm font-medium text-gray-900 dark:text-white">
-                  Step {currentPathStep + 1} of {pathSteps.length}:
-                </p>
-                <p className="text-base text-blue-600 dark:text-blue-400 mt-2 font-semibold">
-                  {getCurrentStepInfo()?.description}
-                </p>
-              </div>
-            )}
-
-            {/* Animation Controls */}
-            {currentPathStep >= 0 && (
-              <div className="flex gap-2 mb-4">
-                <Button
-                  onClick={pauseAnimation}
-                  size="lg"
-                  variant="outline"
-                  className="flex-1 h-14 text-lg"
-                >
-                  <Pause className="h-5 w-5 mr-2" />
-                  {isPaused ? 'Resume' : 'Pause'}
-                </Button>
-                <Button
-                  onClick={resetAnimation}
-                  size="lg"
-                  variant="outline"
-                  className="h-14"
-                >
-                  <RotateCcw className="h-5 w-5" />
-                </Button>
-              </div>
-            )}
-
-            {/* Path Steps List */}
-            {currentPathStep >= 0 && (
-              <div className="mt-6 space-y-2">
-                <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">
-                  ROUTE STEPS
-                </p>
-                {pathSteps.map((step, index) => (
-                  <div
-                    key={index}
-                    className={`
-                      p-3 rounded-lg border-2 transition-all duration-300
-                      ${index === currentPathStep
-                        ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-400 scale-105'
-                        : index < currentPathStep
-                        ? 'bg-green-50 dark:bg-green-900/20 border-green-400'
-                        : 'bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-600'
-                      }
-                    `}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`
-                          w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold
-                          ${index === currentPathStep
-                            ? 'bg-blue-600 text-white'
-                            : index < currentPathStep
-                            ? 'bg-green-600 text-white'
-                            : 'bg-gray-400 text-white'
-                          }
-                        `}
-                      >
-                        {index + 1}
-                      </div>
-                      <p className={`
-                        text-sm
-                        ${index === currentPathStep
-                          ? 'text-blue-900 dark:text-blue-100 font-semibold'
-                          : index < currentPathStep
-                          ? 'text-green-900 dark:text-green-100'
-                          : 'text-gray-600 dark:text-gray-400'
-                        }
-                      `}>
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
     </>
   );
 };

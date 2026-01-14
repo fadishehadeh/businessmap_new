@@ -285,15 +285,7 @@ const OfficeLocator = () => {
               <DirectionsAndVisualization location={searchResult} />
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between mt-8">
-                <Button
-                  onClick={handlePreviousStep}
-                  variant="outline"
-                  size="lg"
-                  className="text-lg px-8 h-14 border-2"
-                >
-                  Back to Location
-                </Button>
+              <div className="flex justify-center mt-8">
                 <Button
                   onClick={handleReset}
                   size="lg"
