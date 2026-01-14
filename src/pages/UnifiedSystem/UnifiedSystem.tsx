@@ -65,32 +65,32 @@ const UnifiedSystem: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-l from-[#1D4381] to-[#1B458A]" dir="rtl" style={{ fontFamily: 'Lusail, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
       {/* Header */}
       <header className="p-6 flex justify-between items-center animate-fade-in">
-        {/* Left side - Language and accessibility */}
-        <div className="flex items-center gap-4 text-white">
-          <button className="text-sm hover:underline transition-all hover:scale-105">English</button>
-          <button className="text-xl hover:scale-110 transition-transform">🔊</button>
-          <button className="text-xl hover:scale-110 transition-transform">A+</button>
-          <button className="text-xl hover:scale-110 transition-transform">A</button>
-          <button className="text-xl hover:scale-110 transition-transform">A-</button>
-          <button className="px-6 py-2 bg-white text-[#1D4381] rounded-full text-sm font-medium hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
-            تسجيل الدخول
-          </button>
-        </div>
-
         {/* Right side - Logos */}
         <div className="flex items-center gap-6">
-          {/* MOCI Logo */}
-          <img
-            src="/images/logo-main-white.svg"
-            alt="MOCI Logo"
-            className="h-20 object-contain hover:scale-105 transition-transform"
-          />
           {/* Unified Logo - Increased size */}
           <img
             src="/images/unifiedlogo.png"
             alt="Unified Logo"
             className="h-20 object-contain hover:scale-105 transition-transform"
           />
+          {/* MOCI Logo */}
+          <img
+            src="/images/logo-main-white.svg"
+            alt="MOCI Logo"
+            className="h-20 object-contain hover:scale-105 transition-transform"
+          />
+        </div>
+
+        {/* Left side - Language and accessibility */}
+        <div className="flex items-center gap-4 text-white">
+          <button className="px-6 py-2 bg-white text-[#1D4381] rounded-full text-sm font-medium hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
+            تسجيل الدخول
+          </button>
+          <button className="text-xl hover:scale-110 transition-transform">A-</button>
+          <button className="text-xl hover:scale-110 transition-transform">A</button>
+          <button className="text-xl hover:scale-110 transition-transform">A+</button>
+          <button className="text-xl hover:scale-110 transition-transform">🔊</button>
+          <button className="text-sm hover:underline transition-all hover:scale-105">English</button>
         </div>
       </header>
 
@@ -102,9 +102,11 @@ const UnifiedSystem: React.FC = () => {
             <CardContent className="p-8">
               {/* Tawtheeq Logo */}
               <div className="mb-6">
-                <div className="w-32 h-12 bg-gray-200 rounded flex items-center justify-center text-sm text-gray-600">
-                  Tawtheeq Logo
-                </div>
+                <img
+                  src="/images/tawtheeq.png"
+                  alt="Tawtheeq Logo"
+                  className="h-12 object-contain"
+                />
               </div>
 
               <h2 className="text-2xl font-bold text-right mb-2">تسجيل الدخول</h2>
@@ -193,14 +195,14 @@ const UnifiedSystem: React.FC = () => {
                         )}
                         <button
                           onClick={() => setSelectedMenu(item.id)}
-                          className={`w-full flex items-center justify-end gap-3 p-3 rounded-lg text-right transition-all duration-200 ${
+                          className={`w-full flex items-center gap-3 p-3 rounded-lg text-right transition-all duration-200 ${
                             selectedMenu === item.id
-                              ? 'bg-[#345D9B]/10 text-[#345D9B] border-l-4 border-[#345D9B]'
+                              ? 'bg-[#345D9B]/10 text-[#345D9B] border-r-4 border-[#345D9B]'
                               : 'hover:bg-gray-100 text-gray-700'
                           }`}
                         >
-                          <span className="font-medium">{item.title}</span>
                           <Icon className="h-5 w-5" />
+                          <span className="font-medium flex-1 text-right">{item.title}</span>
                         </button>
                       </div>
                     );
@@ -227,11 +229,11 @@ const UnifiedSystem: React.FC = () => {
                     onMouseEnter={() => setHoveredCard(index)}
                     onMouseLeave={() => setHoveredCard(null)}
                   >
-                    <CardContent className="p-6 flex flex-col items-end gap-4 relative z-10">
+                    <CardContent className="p-6 flex flex-col items-center gap-4 relative z-10">
                       <div className="bg-[#345D9B]/10 p-3 rounded-lg group-hover:bg-[#345D9B] transition-colors duration-300">
                         <service.icon className="h-6 w-6 text-[#345D9B] group-hover:text-white transition-colors duration-300" />
                       </div>
-                      <div className="flex-1 text-right w-full">
+                      <div className="flex-1 text-center w-full">
                         <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-[#345D9B] transition-colors">
                           {service.title}
                         </h3>
