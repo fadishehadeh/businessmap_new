@@ -58,7 +58,7 @@ const UnifiedSystem: React.FC = () => {
     { icon: FileCheck, title: 'إضافة وكيل جديد - حقوق الموظف', titleEn: 'Add New Agent - Employee Rights' },
     { icon: MessageSquare, title: 'استعلام عن طلب استقالة', titleEn: 'Resignation Request Inquiry' },
     { icon: FileText, title: 'إعداد وإصدار البطاقة', titleEn: 'Card Preparation & Issuance' },
-    { icon: Clock, title: 'استمارة طلب وقف نقل وقف نقل', titleEn: 'Stop Transfer Request Form' },
+    { icon: Clock, title: 'استمارة طلب وقف نقل', titleEn: 'Stop Transfer Request Form' },
   ];
 
   return (
