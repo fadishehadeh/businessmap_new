@@ -29,6 +29,7 @@ import PrivacyPolicy from "./pages/Legal/PrivacyPolicy";
 import Sitemap from "./pages/Sitemap";
 import OfficeLocator from "./pages/OfficeLocator/OfficeLocator";
 import UnifiedSystem from "./pages/UnifiedSystem/UnifiedSystem";
+import BusinessMap from "./pages/BusinessMap/BusinessMap";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AccessibilityProvider } from "./context/AccessibilityContext";
 
@@ -84,6 +85,9 @@ const App = () => (
 
               {/* Office Locator */}
               <Route path="/locator" element={<OfficeLocator />} />
+
+              {/* Business Map - Qatar Business Map Portal */}
+              <Route path="/business-map" element={<BusinessMap />} />
 
               {/* 404 Page */}
               <Route path="*" element={<NotFound />} />
