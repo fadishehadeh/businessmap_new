@@ -32,6 +32,8 @@ import UnifiedSystem from "./pages/UnifiedSystem/UnifiedSystem";
 import BusinessMap from "./pages/BusinessMap/BusinessMap";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AccessibilityProvider } from "./context/AccessibilityContext";
+import { AuthProvider } from "./context/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -39,22 +41,28 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <AccessibilityProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              {/* Redirect root to Business Map */}
-              <Route path="/" element={<Navigate to="/business-map" replace />} />
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                {/* Redirect root to Business Map */}
+                <Route path="/" element={<Navigate to="/business-map" replace />} />
 
-              {/* Business Map - Qatar Business Map Portal - ONLY ACTIVE ROUTE */}
-              <Route path="/business-map" element={<BusinessMap />} />
+                {/* Business Map - Qatar Business Map Portal - ONLY ACTIVE ROUTE - PASSWORD PROTECTED */}
+                <Route path="/business-map" element={
+                  <ProtectedRoute>
+                    <BusinessMap />
+                  </ProtectedRoute>
+                } />
 
-              {/* All other routes redirect to Business Map */}
-              <Route path="*" element={<Navigate to="/business-map" replace />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
+                {/* All other routes redirect to Business Map */}
+                <Route path="*" element={<Navigate to="/business-map" replace />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </AuthProvider>
       </AccessibilityProvider>
     </ThemeProvider>
   </QueryClientProvider>

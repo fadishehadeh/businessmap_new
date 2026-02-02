@@ -22,7 +22,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const login = (password: string): boolean => {
-    if (password === "Grey!Moci!23") {
+    if (password === "MOCI2026") {
       setIsAuthenticated(true);
       localStorage.setItem("moci_authenticated", "true");
       return true;
