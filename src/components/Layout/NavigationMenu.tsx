@@ -114,7 +114,7 @@ const NestedMenuItem = ({ item, onNavClick }: any) => {
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
       >
-        <button className="block w-full text-left select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-qatari/10 hover:text-qatari focus:bg-qatari/10 focus:text-qatari text-gray-700 border-l-4 border-transparent hover:border-qatari">
+        <button className="block w-full text-left select-none rounded-md p-3 leading-none no-underline outline-none text-gray-400 border-l-4 border-transparent cursor-not-allowed opacity-60">
           <div className="text-sm font-medium leading-tight flex items-center justify-between">
             {item.title}
             <span className="text-xs ml-2">→</span>
@@ -138,17 +138,15 @@ const NestedMenuItem = ({ item, onNavClick }: any) => {
 
   return (
     <NavigationMenuLink asChild>
-      <Link
-        to={item.href}
-        onClick={onNavClick}
+      <span
         className={cn(
-          "block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-qatari/10 hover:text-qatari focus:bg-qatari/10 focus:text-qatari text-gray-700 border-l-4 border-transparent hover:border-qatari"
+          "block select-none rounded-md p-3 leading-none no-underline outline-none text-gray-400 border-l-4 border-transparent cursor-not-allowed opacity-60"
         )}
       >
         <div className="text-sm font-medium leading-tight">
           {item.title}
         </div>
-      </Link>
+      </span>
     </NavigationMenuLink>
   );
 };
@@ -168,10 +166,10 @@ const NavigationMenuDemo = () => {
           <NavigationMenuItem key={item.title}>
             {item.submenu ? (
               <>
-                <NavigationMenuTrigger className="text-xl font-medium bg-transparent hover:bg-white/10 focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-white/10 text-white hover:text-white focus:text-white transition-colors duration-200 px-4 py-2 rounded-md">
-                  <Link to={item.href} className="flex items-center" onClick={handleMainNavClick}>
+                <NavigationMenuTrigger className="text-xl font-medium bg-transparent hover:bg-white/10 focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-white/10 text-white/60 hover:text-white/60 focus:text-white/60 transition-colors duration-200 px-4 py-2 rounded-md cursor-not-allowed">
+                  <span className="flex items-center">
                     {item.title}
-                  </Link>
+                  </span>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="mt-1">
                   <ul className="grid w-[400px] gap-1 p-2">
@@ -185,13 +183,11 @@ const NavigationMenuDemo = () => {
               </>
             ) : (
               <NavigationMenuLink asChild>
-                <Link
-                  to={item.href}
-                  onClick={handleMainNavClick}
-                  className="text-xl font-medium bg-transparent hover:bg-transparent focus:bg-transparent text-white hover:text-white focus:text-white px-4 py-2 rounded-md transition-colors"
+                <span
+                  className="text-xl font-medium bg-transparent text-white/60 px-4 py-2 rounded-md cursor-not-allowed"
                 >
                   {item.title}
-                </Link>
+                </span>
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>

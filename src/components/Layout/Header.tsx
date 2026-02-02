@@ -126,14 +126,12 @@ const MobileMenuItem = ({ item, onNavClick, level = 0 }: any) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <Link
-          to={item.href}
-          onClick={onNavClick}
+        <span
           style={{ paddingLeft: `${paddingLeft}px` }}
-          className="flex-1 py-2 text-base border-b border-gray-100 dark:border-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-qatari focus:rounded hover:text-qatari transition-colors"
+          className="flex-1 py-2 text-base border-b border-gray-100 dark:border-gray-700 dark:text-gray-400 cursor-not-allowed opacity-60"
         >
           {item.title}
-        </Link>
+        </span>
         {hasSubmenu && (
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -190,31 +188,31 @@ const Header = () => {
           <div className="flex items-center justify-between gap-4 -my-2">
             {/* Logo */}
             <div className="flex items-center">
-              <Link to="/" className="flex items-center" aria-label="Qatar Ministry of Commerce and Industry - Home">
+              <div className="flex items-center cursor-not-allowed" aria-label="Qatar Ministry of Commerce and Industry - Home">
                 <img
                   src="/images/logo-main.svg"
                   alt="Qatar Ministry of Commerce and Industry Logo"
-                  className="h-[156px] md:h-[181px] max-w-[450px] object-contain -my-2 dark:hidden"
+                  className="h-[156px] md:h-[181px] max-w-[450px] object-contain -my-2 dark:hidden opacity-60"
                 />
                 <img
                   src="/images/logo-main-white.svg"
                   alt="Qatar Ministry of Commerce and Industry Logo"
-                  className="h-[156px] md:h-[181px] max-w-[450px] object-contain -my-2 hidden dark:block"
+                  className="h-[156px] md:h-[181px] max-w-[450px] object-contain -my-2 hidden dark:block opacity-60"
                 />
-              </Link>
+              </div>
             </div>
 
             {/* Right Side - Existing Items */}
             <div className="flex flex-col items-end gap-2">
               {/* Top Row */}
               <div className="flex items-center gap-2 md:gap-4">
-                {/* Search Button */}
+                {/* Search Button - Disabled */}
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={toggleSearch}
+                  disabled
                   aria-label="Search the website"
-                  className="text-gray-600 hover:text-qatari dark:text-gray-300 dark:hover:text-white"
+                  className="text-gray-400 cursor-not-allowed opacity-60"
                 >
                   <Search className="h-4 w-4" aria-hidden="true" />
                 </Button>
@@ -222,36 +220,29 @@ const Header = () => {
                 {/* Theme Switcher */}
                 <ThemeSwitcher />
 
-                {/* Auth Buttons */}
-                <div className="hidden md:flex">
+                {/* Auth Buttons - Hidden */}
+                {/* <div className="hidden md:flex">
                   <AuthButtons />
-                </div>
+                </div> */}
 
-                {/* Language Selector */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="flex items-center gap-1 text-gray-600 hover:text-qatari dark:text-gray-300 dark:hover:text-white"
-                      aria-label="Select language - Current: English"
-                    >
-                      <Globe className="h-4 w-4 mr-1" aria-hidden="true" />
-                      <span>EN</span>
-                      <ChevronDown className="h-3 w-3" aria-hidden="true" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" role="menu" aria-label="Language options">
-                    <DropdownMenuItem role="menuitem">English</DropdownMenuItem>
-                    <DropdownMenuItem role="menuitem" lang="ar">العربية</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                {/* Language Selector - Disabled */}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  disabled
+                  className="flex items-center gap-1 text-gray-400 cursor-not-allowed opacity-60"
+                  aria-label="Select language - Current: English"
+                >
+                  <Globe className="h-4 w-4 mr-1" aria-hidden="true" />
+                  <span>EN</span>
+                  <ChevronDown className="h-3 w-3" aria-hidden="true" />
+                </Button>
               </div>
 
               {/* Bottom Row - Accessibility Tools */}
               <div className="flex items-center gap-2">
-                {/* Employee Portal */}
-                <EmployeePortal />
+                {/* Employee Portal - Hidden */}
+                {/* <EmployeePortal /> */}
 
                 {/* Font Size Switcher */}
                 <FontSizeSwitcher />
@@ -313,17 +304,17 @@ const Header = () => {
                   level={0}
                 />
               ))}
-              {/* Place AuthButtons at the end of mobile menu */}
-              <div className="pt-4 border-t border-gray-100 dark:border-gray-700">
+              {/* Place AuthButtons at the end of mobile menu - Hidden */}
+              {/* <div className="pt-4 border-t border-gray-100 dark:border-gray-700">
                 <AuthButtons />
-              </div>
+              </div> */}
             </nav>
           </div>
         </div>
       )}
 
-      {/* Search Modal */}
-      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      {/* Search Modal - Disabled */}
+      {/* <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} /> */}
     </header>
   );
 };

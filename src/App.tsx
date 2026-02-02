@@ -44,53 +44,14 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              {/* Original MOCI Website (Maroon) - Default */}
-              <Route path="/" element={<Index />} />
-              <Route path="/international" element={<International />} />
+              {/* Redirect root to Business Map */}
+              <Route path="/" element={<Navigate to="/business-map" replace />} />
 
-              {/* About Section */}
-              <Route path="/about" element={<About />} />
-              <Route path="/about/minister" element={<Minister />} />
-              <Route path="/about/strategy" element={<Strategy />} />
-              <Route path="/about/vision" element={<VisionMissionValues />} />
-              <Route path="/about/committees" element={<NationalCommittees />} />
-              <Route path="/about/branches" element={<Branches />} />
-
-              {/* Services Section */}
-              <Route path="/services" element={<Services />} />
-              <Route path="/services/business" element={<Business />} />
-              <Route path="/services/consumer" element={<Consumer />} />
-              <Route path="/services/trade-names" element={<TradeNamesSearch />} />
-
-              {/* E-Services */}
-              <Route path="/e-services" element={<EServices />} />
-
-              {/* Media Center */}
-              <Route path="/media-centre" element={<MediaCenter />} />
-              <Route path="/media-centre/news" element={<News />} />
-              <Route path="/media-centre/news/:id" element={<NewsArticle />} />
-              <Route path="/media-centre/reports" element={<Reports />} />
-              <Route path="/media-centre/gallery" element={<Gallery />} />
-
-              {/* Resources & Contact */}
-              <Route path="/resources" element={<Resources />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-
-              {/* Legal & Sitemap */}
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/sitemap" element={<Sitemap />} />
-
-              {/* Unified System (Blue) - Employee Portal */}
-              <Route path="/unified" element={<UnifiedSystem />} />
-
-              {/* Office Locator */}
-              <Route path="/locator" element={<OfficeLocator />} />
-
-              {/* Business Map - Qatar Business Map Portal */}
+              {/* Business Map - Qatar Business Map Portal - ONLY ACTIVE ROUTE */}
               <Route path="/business-map" element={<BusinessMap />} />
 
-              {/* 404 Page */}
-              <Route path="*" element={<NotFound />} />
+              {/* All other routes redirect to Business Map */}
+              <Route path="*" element={<Navigate to="/business-map" replace />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
