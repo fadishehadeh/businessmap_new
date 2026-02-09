@@ -11,18 +11,18 @@ const SingleWindowHeader = () => {
       {/* Top Utility Row */}
       <div className="bg-white border-b border-gray-200">
         <div className="container-wide mx-auto px-4">
-          <div className="flex justify-between items-center h-10 text-sm" dir="rtl">
-            {/* Right side - utility items */}
+          <div className="flex justify-start items-center h-10 text-sm">
+            {/* Left side - utility items */}
             <div className="flex items-center gap-4">
               <button className="text-black hover:text-[#19407F] transition-colors">
-                تسجيل الدخول
+                <Eye className="h-4 w-4" />
               </button>
               <button className="flex items-center gap-1 text-black hover:text-[#19407F] transition-colors">
                 <Globe className="h-4 w-4" />
                 <span>English</span>
               </button>
               <button className="text-black hover:text-[#19407F] transition-colors">
-                <Eye className="h-4 w-4" />
+                تسجيل الدخول
               </button>
             </div>
           </div>
@@ -35,9 +35,9 @@ const SingleWindowHeader = () => {
           <div className="flex justify-between items-center h-20" dir="rtl">
             {/* Right side - Logo */}
             <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/d8e3e6e5-e0e5-4e8e-8e5e-5e5e5e5e5e5e.png" 
-                alt="Single Window Logo" 
+              <img
+                src="/lg.svg"
+                alt="Single Window Logo"
                 className="h-16"
               />
             </div>
@@ -62,18 +62,14 @@ const SingleWindowHeader = () => {
       </div>
 
       {/* Blue Pattern Banner Strip */}
-      <div 
-        className="h-12 relative overflow-hidden"
-        style={{ backgroundColor: '#19407F' }}
+      <div
+        className="h-12 relative overflow-hidden bg-cover bg-center"
+        style={{
+          backgroundImage: 'url(/images/strip.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
       >
-        {/* Geometric pattern overlay */}
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundSize: '30px 30px'
-          }}
-        />
       </div>
 
       {/* Breadcrumb Row */}
