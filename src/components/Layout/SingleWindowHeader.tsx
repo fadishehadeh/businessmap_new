@@ -11,18 +11,29 @@ const SingleWindowHeader = () => {
       {/* Top Utility Row */}
       <div className="bg-white border-b border-gray-200">
         <div className="container-wide mx-auto px-4">
-          <div className="flex justify-start items-center h-10 text-sm">
+          <div className="flex justify-start items-center h-16 text-sm">
             {/* Left side - utility items */}
-            <div className="flex items-center gap-4">
-              <button className="text-black hover:text-[#19407F] transition-colors">
-                <Eye className="h-4 w-4" />
-              </button>
-              <button className="flex items-center gap-1 text-black hover:text-[#19407F] transition-colors">
-                <Globe className="h-4 w-4" />
-                <span>English</span>
-              </button>
-              <button className="text-black hover:text-[#19407F] transition-colors">
+            <div className="flex items-center gap-0">
+              {/* Login Button - Yellow with hover */}
+              <button className="bg-[#FDC300] hover:bg-[#e5b000] text-gray-800 font-medium px-6 py-2 rounded-full transition-colors">
                 تسجيل الدخول
+              </button>
+
+              {/* Vertical Separator */}
+              <div className="h-8 w-px bg-gray-300 mx-3"></div>
+
+              {/* Qatar Flag + English */}
+              <button className="flex items-center gap-2 text-gray-700 hover:text-[#19407F] transition-colors px-4 py-2">
+                <span className="text-base">English</span>
+                <span className="text-2xl">🇶🇦</span>
+              </button>
+
+              {/* Vertical Separator */}
+              <div className="h-8 w-px bg-gray-300 mx-3"></div>
+
+              {/* Eye Icon */}
+              <button className="text-gray-700 hover:text-[#19407F] transition-colors px-4 py-2">
+                <Eye className="h-5 w-5" />
               </button>
             </div>
           </div>
@@ -44,15 +55,15 @@ const SingleWindowHeader = () => {
 
             {/* Left side - Menu and Search */}
             <div className="flex items-center gap-4">
-              <button 
+              <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="text-[#19407F] hover:text-[#FDC300] transition-colors"
+                className="text-[#19407F] hover:text-[#FDC300] transition-colors p-2"
               >
-                <Search className="h-6 w-6" />
+                <Search className="h-7 w-7" />
               </button>
-              <button 
+              <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-[#19407F] hover:text-[#FDC300] transition-colors"
+                className="bg-[#19407F] hover:bg-[#FDC300] text-white hover:text-[#19407F] transition-colors p-3 rounded"
               >
                 <Menu className="h-6 w-6" />
               </button>
@@ -63,7 +74,7 @@ const SingleWindowHeader = () => {
 
       {/* Blue Pattern Banner Strip */}
       <div
-        className="h-24 relative overflow-hidden bg-cover bg-center"
+        className="h-[125px] relative overflow-hidden bg-cover bg-center"
         style={{
           backgroundImage: 'url(/images/strip.png)',
           backgroundSize: 'cover',
