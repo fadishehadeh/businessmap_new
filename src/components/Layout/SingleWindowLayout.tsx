@@ -20,7 +20,7 @@ const SingleWindowLayout: React.FC<SingleWindowLayoutProps> = ({ children }) => 
       <SingleWindowHeader />
       
       {/* Main content with top padding to account for fixed header */}
-      <main id="main-content" className="flex-grow pt-[156px]" role="main">
+      <main id="main-content" className="flex-grow pt-[204px]" role="main">
         {children}
       </main>
       

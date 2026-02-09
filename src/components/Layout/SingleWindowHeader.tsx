@@ -63,7 +63,7 @@ const SingleWindowHeader = () => {
 
       {/* Blue Pattern Banner Strip */}
       <div
-        className="h-12 relative overflow-hidden bg-cover bg-center"
+        className="h-24 relative overflow-hidden bg-cover bg-center"
         style={{
           backgroundImage: 'url(/images/strip.png)',
           backgroundSize: 'cover',
