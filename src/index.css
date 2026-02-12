@@ -622,4 +622,40 @@
   .hover\:shadow-3xl:hover {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
+
+  /* Blue Portal Specific Styles */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Smooth page transitions */
+  main {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  /* Focus visible for accessibility */
+  *:focus-visible {
+    outline: 2px solid #FDC300;
+    outline-offset: 2px;
+  }
+
+  /* Custom scrollbar for filter panel */
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #19407F;
+    border-radius: 4px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #FDC300;
+  }
 }

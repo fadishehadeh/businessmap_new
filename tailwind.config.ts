@@ -58,6 +58,13 @@ export default {
 					dark: '#6a0926',
 					foreground: '#ffffff',
 				},
+				// Blue theme colors for new portal
+				blue: {
+					primary: '#19407F', // Primary Blue
+					accent: '#FDC300', // Accent Yellow
+					dark: '#0F2847', // Darker blue for backgrounds
+					light: '#2B5A9E', // Lighter blue for hover states
+				},
 				info: '#0066cc',
 				success: '#28a745',
 				warning: '#ffc107',
@@ -101,6 +108,22 @@ export default {
 					'0%, 100%': { transform: 'scale(1)', opacity: '1' },
 					'50%': { transform: 'scale(1.05)', opacity: '0.9' },
 				},
+				'slide-up': {
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' },
+				},
+				'scale-in': {
+					'0%': { opacity: '0', transform: 'scale(0.8)' },
+					'100%': { opacity: '1', transform: 'scale(1)' },
+				},
+				'glow': {
+					'0%, 100%': { boxShadow: '0 0 5px rgba(25, 64, 127, 0.5)' },
+					'50%': { boxShadow: '0 0 20px rgba(25, 64, 127, 0.8)' },
+				},
+				'shimmer': {
+					'0%': { backgroundPosition: '-1000px 0' },
+					'100%': { backgroundPosition: '1000px 0' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -110,6 +133,10 @@ export default {
 				'slide-in-right': 'slide-in-right 0.3s ease-out',
 				'slide-out-right': 'slide-out-right 0.3s ease-out',
 				'slow-pulse': 'slow-pulse 3s ease-in-out infinite',
+				'slide-up': 'slide-up 0.4s ease-out',
+				'scale-in': 'scale-in 0.3s ease-out',
+				'glow': 'glow 2s ease-in-out infinite',
+				'shimmer': 'shimmer 2s linear infinite',
 			},
 		}
 	},

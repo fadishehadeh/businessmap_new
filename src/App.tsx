@@ -30,6 +30,10 @@ import Sitemap from "./pages/Sitemap";
 import OfficeLocator from "./pages/OfficeLocator/OfficeLocator";
 import UnifiedSystem from "./pages/UnifiedSystem/UnifiedSystem";
 import BusinessMap from "./pages/BusinessMap/BusinessMap";
+import HomePage from "./pages/BluePortal/HomePage";
+import InteractiveMapPage from "./pages/BluePortal/InteractiveMapPage";
+import BusinessTypesPage from "./pages/BluePortal/BusinessTypesPage";
+import MonitorClosuresPage from "./pages/BluePortal/MonitorClosuresPage";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AccessibilityProvider } from "./context/AccessibilityContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -47,18 +51,22 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <Routes>
-                {/* Redirect root to Business Map */}
-                <Route path="/" element={<Navigate to="/business-map" replace />} />
+                {/* Blue Portal Routes - New Modern Government Portal */}
+                <Route path="/" element={<HomePage />} />
+                <Route path="/blue-portal/home" element={<HomePage />} />
+                <Route path="/blue-portal/interactive-map" element={<InteractiveMapPage />} />
+                <Route path="/blue-portal/business-types" element={<BusinessTypesPage />} />
+                <Route path="/blue-portal/monitor-closures" element={<MonitorClosuresPage />} />
 
-                {/* Business Map - Qatar Business Map Portal - ONLY ACTIVE ROUTE - PASSWORD PROTECTED */}
+                {/* Business Map - Qatar Business Map Portal - PASSWORD PROTECTED */}
                 <Route path="/business-map" element={
                   <ProtectedRoute>
                     <BusinessMap />
                   </ProtectedRoute>
                 } />
 
-                {/* All other routes redirect to Business Map */}
-                <Route path="*" element={<Navigate to="/business-map" replace />} />
+                {/* Fallback to home */}
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </BrowserRouter>
           </TooltipProvider>
