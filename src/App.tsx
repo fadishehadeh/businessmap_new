@@ -37,19 +37,21 @@ import MonitorClosuresPage from "./pages/BluePortal/MonitorClosuresPage";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AccessibilityProvider } from "./context/AccessibilityContext";
 import { AuthProvider } from "./context/AuthContext";
+import { LanguageProvider } from "./context/LanguageContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <AccessibilityProvider>
-        <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
+    <LanguageProvider>
+      <ThemeProvider>
+        <AccessibilityProvider>
+          <AuthProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
               <Routes>
                 {/* Blue Portal Routes - New Modern Government Portal */}
                 <Route path="/" element={<HomePage />} />
@@ -73,6 +75,7 @@ const App = () => (
         </AuthProvider>
       </AccessibilityProvider>
     </ThemeProvider>
+    </LanguageProvider>
   </QueryClientProvider>
 );
 

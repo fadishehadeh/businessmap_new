@@ -16,8 +16,10 @@ import {
   landmarks,
   mockEstablishments
 } from '@/data/mockBusinessData';
+import { useLanguage } from '@/context/LanguageContext';
 
 const BusinessTypesPage = () => {
+  const { t, dir } = useLanguage();
   const [selectedMunicipality, setSelectedMunicipality] = useState<string>('all');
   const [selectedOwnership, setSelectedOwnership] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('active');
@@ -62,21 +64,21 @@ const BusinessTypesPage = () => {
 
   // Filter Panel Content (reusable for desktop and mobile)
   const FilterPanelContent = () => (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6" dir={dir}>
       {/* Panel Title */}
       <div className="border-b border-gray-200 pb-4">
         <h2 className="text-2xl font-bold text-[#19407F]">
-          Explore Business Types
+          {t('businessTypes.title')}
         </h2>
         <p className="text-sm text-gray-600 mt-2">
-          Showing {filteredCount.toLocaleString()} establishments
+          {t('businessTypes.showing')} {filteredCount.toLocaleString()} {t('businessTypes.establishments')}
         </p>
       </div>
 
       {/* Municipality Selector */}
       <div className="space-y-2">
         <label htmlFor="municipality-select" className="text-sm font-semibold text-gray-700">
-          Select Municipality
+          {t('businessTypes.selectMunicipality')}
         </label>
         <Select value={selectedMunicipality} onValueChange={setSelectedMunicipality}>
           <SelectTrigger
@@ -84,10 +86,10 @@ const BusinessTypesPage = () => {
             className="w-full bg-white border-gray-300 text-gray-900"
             aria-label="Select municipality"
           >
-            <SelectValue placeholder="Select municipality" />
+            <SelectValue placeholder={t('businessTypes.selectMunicipality')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Municipalities</SelectItem>
+            <SelectItem value="all">{t('businessTypes.allMunicipalities')}</SelectItem>
             {municipalities.map(m => (
               <SelectItem key={m.id} value={m.id}>{m.name}</SelectItem>
             ))}
@@ -98,7 +100,7 @@ const BusinessTypesPage = () => {
       {/* Ownership Type Tabs */}
       <div className="space-y-2">
         <label className="text-sm font-semibold text-gray-700">
-          Ownership Type
+          {t('businessTypes.ownershipType')}
         </label>
         <div className="flex gap-2 flex-wrap" role="group" aria-label="Ownership type filter">
           {ownershipTypes.map(type => (
@@ -122,11 +124,11 @@ const BusinessTypesPage = () => {
       {/* License Status */}
       <div className="space-y-2">
         <label className="text-sm font-semibold text-gray-700">
-          License Status
+          {t('businessTypes.licenseStatus')}
         </label>
         <Select value={selectedStatus} onValueChange={setSelectedStatus}>
           <SelectTrigger className="w-full bg-white border-gray-300 text-gray-900">
-            <SelectValue placeholder="Select status" />
+            <SelectValue placeholder={t('businessTypes.licenseStatus')} />
           </SelectTrigger>
           <SelectContent>
             {licenseStatuses.map(status => (
@@ -139,11 +141,11 @@ const BusinessTypesPage = () => {
       {/* Categories Dropdown */}
       <div className="space-y-2">
         <label className="text-sm font-semibold text-gray-700">
-          Categories
+          {t('businessTypes.categories')}
         </label>
         <Select>
           <SelectTrigger className="w-full bg-white border-gray-300 text-gray-900">
-            <SelectValue placeholder="Select categories" />
+            <SelectValue placeholder={t('businessTypes.categories')} />
           </SelectTrigger>
           <SelectContent>
             {businessCategories.map(cat => (
@@ -158,11 +160,11 @@ const BusinessTypesPage = () => {
       {/* Landmarks Dropdown */}
       <div className="space-y-2">
         <label className="text-sm font-semibold text-gray-700">
-          Landmarks
+          {t('businessTypes.landmarks')}
         </label>
         <Select>
           <SelectTrigger className="w-full bg-white border-gray-300 text-gray-900">
-            <SelectValue placeholder="Select landmark" />
+            <SelectValue placeholder={t('businessTypes.landmarks')} />
           </SelectTrigger>
           <SelectContent>
             {landmarks.map(landmark => (
@@ -177,7 +179,7 @@ const BusinessTypesPage = () => {
       {/* Capital Range Slider */}
       <div className="space-y-4">
         <label className="text-sm font-semibold text-gray-700">
-          Capital Range (QAR)
+          {t('businessTypes.capitalRange')}
         </label>
         <div className="px-2">
           <Slider
@@ -200,9 +202,9 @@ const BusinessTypesPage = () => {
         <CardContent className="p-4">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
-              <p className="text-sm font-semibold text-gray-700">Population Info</p>
+              <p className="text-sm font-semibold text-gray-700">{t('businessTypes.populationInfo')}</p>
               <p className="text-xs text-gray-600">
-                Demographic data for selected area
+                {t('businessTypes.demographicData')}
               </p>
             </div>
             <Info className="w-5 h-5 text-[#19407F]" />
@@ -212,7 +214,7 @@ const BusinessTypesPage = () => {
             size="sm"
             className="w-full mt-3 border-[#19407F] text-[#19407F] hover:bg-[#19407F] hover:text-white"
           >
-            More
+            {t('businessTypes.more')}
           </Button>
         </CardContent>
       </Card>
@@ -221,16 +223,16 @@ const BusinessTypesPage = () => {
 
   return (
     <BluePortalLayout showFooter={false}>
-      <div className="fixed left-0 right-0 bottom-0 top-[317px] flex">
-        {/* Desktop Left Filter Panel */}
-        <aside className="hidden lg:block w-80 bg-white border-r border-gray-200 overflow-y-auto shadow-lg">
+      <div className="fixed left-0 right-0 bottom-0 top-[317px]" dir={dir}>
+        {/* Desktop Filter Panel - Left in English, Right in Arabic */}
+        <aside className={`hidden lg:block fixed top-[317px] bottom-0 w-80 bg-white overflow-y-auto shadow-lg border-gray-200 ${dir === 'rtl' ? 'right-0 border-l' : 'left-0 border-r'}`}>
           <FilterPanelContent />
         </aside>
 
         {/* Main Map Canvas */}
-        <main className="flex-1 relative bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden">
+        <main className={`absolute top-0 bottom-0 bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden ${dir === 'rtl' ? 'right-80 left-0' : 'left-80 right-0'}`}>
           {/* Mobile Filter Button */}
-          <div className="lg:hidden absolute top-4 left-4 z-30">
+          <div className={`lg:hidden absolute top-4 z-30 ${dir === 'rtl' ? 'right-4' : 'left-4'}`}>
             <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
               <SheetTrigger asChild>
                 <Button
@@ -238,13 +240,13 @@ const BusinessTypesPage = () => {
                   className="bg-[#19407F] hover:bg-[#2557A7] text-white shadow-xl"
                 >
                   <Filter className="w-5 h-5 mr-2" />
-                  Filters
+                  {t('businessTypes.filters')}
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-full sm:w-96 p-0 overflow-y-auto">
+              <SheetContent side={dir === 'rtl' ? 'right' : 'left'} className="w-full sm:w-96 p-0 overflow-y-auto">
                 <div className="sticky top-0 bg-white z-10 p-4 border-b flex items-center justify-between">
                   <SheetTitle className="text-xl font-bold text-[#19407F]">
-                    Filters
+                    {t('businessTypes.filters')}
                   </SheetTitle>
                 </div>
                 <FilterPanelContent />
@@ -267,7 +269,7 @@ const BusinessTypesPage = () => {
           </div>
 
           {/* Zoom Controls */}
-          <div className="absolute bottom-24 right-6 flex flex-col gap-2 z-10">
+          <div className={`absolute bottom-24 flex flex-col gap-2 z-10 ${dir === 'rtl' ? 'left-6' : 'right-6'}`}>
             <Button
               size="icon"
               className="bg-white hover:bg-gray-100 text-gray-900 shadow-lg rounded-lg"
@@ -298,7 +300,7 @@ const BusinessTypesPage = () => {
                   <div className="w-2 h-2 bg-[#FDC300] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                   <div className="w-2 h-2 bg-[#FDC300] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
-                <span className="font-medium">Loading data...</span>
+                <span className="font-medium">{t('businessTypes.loadingData')}</span>
               </div>
             </div>
           )}

@@ -2,55 +2,58 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import BluePortalLayout from '@/components/Layout/BluePortalLayout';
 import { Card, CardContent } from '@/components/ui/card';
-import { 
-  Map, 
-  XCircle, 
-  Sparkles, 
+import {
+  Map,
+  XCircle,
+  Sparkles,
   Target,
   BarChart3,
   Globe
 } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const InteractiveMapPage = () => {
+  const { t, dir } = useLanguage();
+
   const modules = [
     {
-      title: 'Explore Business Types',
-      description: 'All registered businesses by regions across the Agro, license status and categories.',
+      title: t('service.exploreTypes.title'),
+      description: t('service.exploreTypes.desc'),
       icon: Map,
       link: '/blue-portal/business-types',
       available: true
     },
     {
-      title: 'Monitor Business Closures',
-      description: 'Track business closures by regions and date range with interactive map visualizations.',
+      title: t('service.monitorClosures.title'),
+      description: t('service.monitorClosures.desc'),
       icon: XCircle,
       link: '/blue-portal/monitor-closures',
       available: true
     },
     {
-      title: 'Discover New Businesses',
-      description: 'Find recently registered businesses by location, date range, and categories.',
+      title: t('service.discoverNew.title'),
+      description: t('service.discoverNew.desc'),
       icon: Sparkles,
       link: '#',
       available: false
     },
     {
-      title: 'Strategic Gap Analysis',
-      description: 'Identify market opportunities and business gaps by analyzing spatial data and demographics.',
+      title: t('interactive.strategicGap.title'),
+      description: t('interactive.strategicGap.desc'),
       icon: Target,
       link: '#',
       available: false
     },
     {
-      title: 'Business Distribution',
-      description: 'View geographic distribution of businesses filtered by region, status, and time period.',
+      title: t('interactive.distribution.title'),
+      description: t('interactive.distribution.desc'),
       icon: BarChart3,
       link: '#',
       available: false
     },
     {
-      title: 'Attract Foreign Investment',
-      description: 'Analyze foreign investments by region, country of origin, and establishment counts.',
+      title: t('interactive.foreignInvestment.title'),
+      description: t('interactive.foreignInvestment.desc'),
       icon: Globe,
       link: '#',
       available: false
@@ -60,7 +63,7 @@ const InteractiveMapPage = () => {
   return (
     <BluePortalLayout showFooter={false}>
       {/* Full screen background */}
-      <div className="min-h-screen bg-gradient-to-br from-[#19407F] via-[#2557A7] to-[#19407F] py-16">
+      <div className="min-h-screen bg-gradient-to-br from-[#19407F] via-[#2557A7] to-[#19407F] py-16" dir={dir}>
         {/* Stylized pattern background */}
         <div
           className="absolute inset-0 opacity-5"
@@ -75,10 +78,10 @@ const InteractiveMapPage = () => {
             {/* Title */}
             <div className="text-center mb-16 animate-slide-up">
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                how can we support you?
+                {t('interactive.title')}
               </h1>
               <p className="text-xl text-white/90">
-                Choose a module to explore Qatar's business landscape
+                {t('interactive.subtitle')}
               </p>
             </div>
 
@@ -120,7 +123,7 @@ const InteractiveMapPage = () => {
                         </p>
                         <div className="pt-2">
                           <span className="inline-block px-3 py-1 bg-gray-200 text-gray-500 text-xs rounded-full">
-                            Coming Soon
+                            {t('interactive.comingSoon')}
                           </span>
                         </div>
                       </CardContent>

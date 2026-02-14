@@ -15,18 +15,20 @@ import {
   BarChart3,
   TrendingDown
 } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { t, dir } = useLanguage();
 
   // Animated counter state
   const [counters, setCounters] = useState([0, 0, 0, 0]);
 
   const kpiData = [
-    { label: 'Total Establishment Count', value: 15243, icon: Building2 },
-    { label: 'Last Year Establishment Count', value: 12890, icon: Calendar },
-    { label: 'Last 6 Months', value: 8456, icon: TrendingUp },
-    { label: 'Last 3 Months', value: 4321, icon: Activity },
+    { label: t('home.kpi.total'), value: 15243, icon: Building2 },
+    { label: t('home.kpi.lastYear'), value: 12890, icon: Calendar },
+    { label: t('home.kpi.last6Months'), value: 8456, icon: TrendingUp },
+    { label: t('home.kpi.last3Months'), value: 4321, icon: Activity },
   ];
 
   // Animate counters on mount
@@ -53,26 +55,26 @@ const HomePage = () => {
 
   const services = [
     {
-      title: 'Explore Business Types',
-      description: 'All registered businesses by regions across the Agro, license status and categories.',
+      title: t('service.exploreTypes.title'),
+      description: t('service.exploreTypes.desc'),
       icon: Grid3x3,
       link: '/blue-portal/business-types'
     },
     {
-      title: 'Check Location Readiness',
-      description: 'Map shows location suitability for business. On hovering the map, users can view the location and accessibility.',
+      title: t('service.checkLocation.title'),
+      description: t('service.checkLocation.desc'),
       icon: MapPin,
       link: '/blue-portal/interactive-map'
     },
     {
-      title: 'Monitor Business Closures',
-      description: 'Track business closures by regions and date range with interactive map visualizations.',
+      title: t('service.monitorClosures.title'),
+      description: t('service.monitorClosures.desc'),
       icon: XCircle,
       link: '/blue-portal/monitor-closures'
     },
     {
-      title: 'Discover New Businesses',
-      description: 'Find recently registered businesses by location, date range, and categories.',
+      title: t('service.discoverNew.title'),
+      description: t('service.discoverNew.desc'),
       icon: Sparkles,
       link: '/blue-portal/interactive-map'
     },
@@ -80,13 +82,13 @@ const HomePage = () => {
 
   const reports = [
     {
-      title: 'Business Overview',
-      description: 'High-level view of all business by business, by business type, by license status, by ownership, by municipalities.',
+      title: t('report.overview.title'),
+      description: t('report.overview.desc'),
       icon: BarChart3
     },
     {
-      title: 'Demographic Reports',
-      description: 'Demographic data of all businesses. The reports, by business type, by license status, by ownership, by municipalities.',
+      title: t('report.demographic.title'),
+      description: t('report.demographic.desc'),
       icon: TrendingDown
     },
   ];
@@ -94,7 +96,7 @@ const HomePage = () => {
   return (
     <BluePortalLayout showFooter={true}>
       {/* Hero Section */}
-      <section className="relative min-h-[500px] bg-gradient-to-br from-[#19407F] via-[#2557A7] to-[#19407F] overflow-hidden">
+      <section className="relative min-h-[500px] bg-gradient-to-br from-[#19407F] via-[#2557A7] to-[#19407F] overflow-hidden" dir={dir}>
         <div
           className="absolute inset-0 bg-cover bg-center opacity-10"
           style={{
@@ -104,25 +106,8 @@ const HomePage = () => {
 
         <div className="container-wide mx-auto px-4 py-20 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                ignite your<br />
-                <span className="text-[#FDC300]">business</span>
-              </h1>
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
-                Make smarter decisions about your project. Our interactive map, reports,<br />
-                and insights.
-              </p>
-              <Button
-                size="lg"
-                onClick={() => navigate('/blue-portal/interactive-map')}
-                className="bg-[#FDC300] hover:bg-[#FDC300]/90 text-[#19407F] font-semibold px-8 py-3 text-base rounded-md shadow-xl"
-              >
-                Get Started →
-              </Button>
-            </div>
-
-            <div className="animate-slide-up hidden lg:block">
+            {/* Image - Left in Arabic, Right in English */}
+            <div className={`animate-slide-up hidden lg:block ${dir === 'rtl' ? 'lg:order-2' : 'lg:order-1'}`}>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 shadow-2xl border border-white/20">
                 <div className="bg-white rounded-md overflow-hidden aspect-video flex items-center justify-center">
                   <img
@@ -133,12 +118,30 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
+
+            {/* Text Content - Right in Arabic, Left in English */}
+            <div className={`text-white animate-fade-in ${dir === 'rtl' ? 'lg:order-1' : 'lg:order-2'}`}>
+              <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                {t('home.hero.title1')}<br />
+                <span className="text-[#FDC300]">{t('home.hero.title2')}</span>
+              </h1>
+              <p className="text-xl text-white/90 mb-8 leading-relaxed">
+                {t('home.hero.subtitle')}
+              </p>
+              <Button
+                size="lg"
+                onClick={() => navigate('/blue-portal/interactive-map')}
+                className="bg-[#FDC300] hover:bg-[#FDC300]/90 text-[#19407F] font-semibold px-8 py-3 text-base rounded-md shadow-xl"
+              >
+                {t('home.hero.cta')}
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* KPI Cards */}
-      <section className="bg-gray-50 py-12">
+      <section className="bg-gray-50 py-12" dir={dir}>
         <div className="container-wide mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {kpiData.map((kpi, index) => {
@@ -172,11 +175,11 @@ const HomePage = () => {
       </section>
 
       {/* Our Services */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-16" dir={dir}>
         <div className="container-wide mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#19407F] mb-2">Our Services</h2>
-            <p className="text-gray-600">Explore our comprehensive business solutions</p>
+            <h2 className="text-4xl font-bold text-[#19407F] mb-2">{t('home.services.title')}</h2>
+            <p className="text-gray-600">{t('home.services.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -203,11 +206,11 @@ const HomePage = () => {
       </section>
 
       {/* Our Reports */}
-      <section className="bg-gray-50 py-16 pb-24">
+      <section className="bg-gray-50 py-16 pb-24" dir={dir}>
         <div className="container-wide mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#19407F] mb-2">Our Reports</h2>
-            <p className="text-gray-600">Comprehensive business intelligence and analytics</p>
+            <h2 className="text-4xl font-bold text-[#19407F] mb-2">{t('home.reports.title')}</h2>
+            <p className="text-gray-600">{t('home.reports.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -229,7 +232,7 @@ const HomePage = () => {
 
                     {/* Placeholder Chart Visual */}
                     <div className="mt-6 h-48 bg-gradient-to-br from-[#19407F]/10 to-[#FDC300]/10 rounded-lg flex items-center justify-center border border-gray-200">
-                      <div className="text-gray-400 text-sm">Chart Visualization</div>
+                      <div className="text-gray-400 text-sm">{t('report.chartVisualization')}</div>
                     </div>
                   </CardContent>
                 </Card>

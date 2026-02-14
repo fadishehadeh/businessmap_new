@@ -4,8 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calendar, Info } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const MonitorClosuresPage = () => {
+  const { t, dir } = useLanguage();
   const [selectedMunicipality, setSelectedMunicipality] = useState('all');
 
   const municipalities = [
@@ -18,25 +20,25 @@ const MonitorClosuresPage = () => {
 
   return (
     <BluePortalLayout showFooter={false}>
-      <div className="fixed inset-0 top-[317px] flex">
-        {/* Left Sidebar */}
-        <aside className="w-96 bg-white border-r border-gray-200 overflow-y-auto shadow-lg">
+      <div className="fixed inset-0 top-[317px]" dir={dir}>
+        {/* Sidebar - Left in English, Right in Arabic */}
+        <aside className={`fixed top-[317px] bottom-0 w-96 bg-white overflow-y-auto shadow-lg border-gray-200 ${dir === 'rtl' ? 'right-0 border-l' : 'left-0 border-r'}`}>
           <div className="p-6 space-y-6">
             {/* Title */}
             <div className="border-b border-gray-200 pb-4">
               <h2 className="text-2xl font-bold text-[#19407F]">
-                Monitor Business Closures
+                {t('monitor.title')}
               </h2>
             </div>
 
             {/* Municipality Selector */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-700">
-                Select Municipality
+                {t('businessTypes.selectMunicipality')}
               </label>
               <Select value={selectedMunicipality} onValueChange={setSelectedMunicipality}>
                 <SelectTrigger className="w-full bg-white border-gray-300 text-gray-900">
-                  <SelectValue placeholder="Select municipality" />
+                  <SelectValue placeholder={t('businessTypes.selectMunicipality')} />
                 </SelectTrigger>
                 <SelectContent>
                   {municipalities.map(m => (
@@ -48,26 +50,26 @@ const MonitorClosuresPage = () => {
 
             {/* Date Range From */}
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-700">From</label>
+              <label className="text-sm font-semibold text-gray-700">{t('monitor.from')}</label>
               <div className="grid grid-cols-2 gap-2">
                 <Button variant="outline" size="sm" className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-[#19407F]">
-                  Last 1 Month
+                  {t('monitor.last1Month')}
                 </Button>
                 <Button variant="outline" size="sm" className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-[#19407F]">
-                  Last 6 Months
+                  {t('monitor.last6Months')}
                 </Button>
                 <Button variant="outline" size="sm" className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-[#19407F]">
-                  Last 1 Year
+                  {t('monitor.last1Year')}
                 </Button>
                 <Button variant="outline" size="sm" className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-[#19407F]">
-                  Last 5 Years
+                  {t('monitor.last5Years')}
                 </Button>
               </div>
             </div>
 
             {/* Date Range To */}
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-700">To</label>
+              <label className="text-sm font-semibold text-gray-700">{t('monitor.to')}</label>
               <input
                 type="date"
                 className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-900"
@@ -79,7 +81,7 @@ const MonitorClosuresPage = () => {
             <div className="space-y-2">
               <Button className="w-full bg-[#19407F] hover:bg-[#2557A7] text-white justify-start">
                 <Calendar className="w-4 h-4 mr-2" />
-                Categories
+                {t('monitor.categories')}
               </Button>
             </div>
 
@@ -88,19 +90,19 @@ const MonitorClosuresPage = () => {
               <CardContent className="p-4">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <p className="text-sm font-semibold text-gray-600">Population</p>
+                    <p className="text-sm font-semibold text-gray-600">{t('monitor.population')}</p>
                     <p className="text-2xl font-bold text-[#19407F] mt-1">2.85M</p>
-                    <p className="text-xs text-gray-500 mt-1">person</p>
+                    <p className="text-xs text-gray-500 mt-1">{t('monitor.person')}</p>
                   </div>
                   <Info className="w-5 h-5 text-[#19407F]" />
                 </div>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-gray-600">
-                    <span>Males: 2.03M</span>
+                    <span>{t('monitor.males')}: 2.03M</span>
                     <span>71.5%</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
-                    <span>Females: 0.81M</span>
+                    <span>{t('monitor.females')}: 0.81M</span>
                     <span>28.5%</span>
                   </div>
                 </div>
@@ -109,7 +111,7 @@ const MonitorClosuresPage = () => {
                   size="sm"
                   className="w-full mt-3 bg-white border-[#19407F] text-[#19407F] hover:bg-[#19407F] hover:text-white"
                 >
-                  More
+                  {t('monitor.more')}
                 </Button>
               </CardContent>
             </Card>
@@ -117,7 +119,7 @@ const MonitorClosuresPage = () => {
         </aside>
 
         {/* Map Area - Google Maps Embed */}
-        <main className="flex-1 relative bg-gradient-to-br from-blue-50 via-white to-blue-50">
+        <main className={`absolute top-0 bottom-0 bg-gradient-to-br from-blue-50 via-white to-blue-50 ${dir === 'rtl' ? 'right-96 left-0' : 'left-96 right-0'}`}>
           {/* Google Maps Embed */}
           <div className="absolute inset-0">
             <iframe

@@ -1,42 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/context/LanguageContext';
 
 const BluePortalFooter = () => {
+  const { t, dir } = useLanguage();
+
   const footerSections = [
     {
-      title: 'About',
+      title: t('footer.about'),
       links: [
-        { label: 'Our Story', href: '#' },
-        { label: 'Mission & Vision', href: '#' },
+        { label: t('footer.ourStory'), href: '#' },
+        { label: t('footer.missionVision'), href: '#' },
       ]
     },
     {
-      title: 'Sectors',
+      title: t('footer.sectors'),
       links: [
-        { label: 'Healthcare', href: '#' },
-        { label: 'Finance', href: '#' },
-        { label: 'Education', href: '#' },
-        { label: 'Logistics', href: '#' },
+        { label: t('footer.healthcare'), href: '#' },
+        { label: t('footer.finance'), href: '#' },
+        { label: t('footer.education'), href: '#' },
+        { label: t('footer.logistics'), href: '#' },
       ]
     },
     {
-      title: 'Insights',
+      title: t('footer.insights'),
       links: [
-        { label: 'Reports', href: '/reports' },
+        { label: t('footer.reports'), href: '/reports' },
       ]
     },
     {
-      title: 'Discover More',
+      title: t('footer.discoverMore'),
       links: [
-        { label: 'Case Studies', href: '#' },
-        { label: 'Contact Us', href: '#' },
-        { label: 'Terms & Conditions', href: '#' },
+        { label: t('footer.caseStudies'), href: '#' },
+        { label: t('footer.contactUs'), href: '#' },
+        { label: t('footer.terms'), href: '#' },
       ]
     }
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-[#19407F] to-[#2557A7] text-white">
+    <footer className="bg-gradient-to-b from-[#19407F] to-[#2557A7] text-white" dir={dir}>
       {/* Main Footer Content */}
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -65,10 +68,10 @@ const BluePortalFooter = () => {
       {/* Bottom Bar */}
       <div className="border-t border-white/20">
         <div className="container mx-auto px-6 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className={`flex flex-col md:flex-row ${dir === 'rtl' ? 'md:flex-row-reverse' : ''} justify-between items-center gap-6`}>
             {/* Copyright */}
             <div className="text-white/80 text-base">
-              © 2025 MOCI Qatar. All rights reserved.
+              {t('footer.copyright')}
             </div>
 
             {/* Logo */}
